@@ -8,15 +8,17 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
 import models.BaseRequest
+import routes.argonaut.ArgonautRoute
+import routes.circe.CirceRoute
 
 import scala.io.StdIn
+import scala.util.Random
 
 /**
   * Created by Alexander on 26.07.2017.
   */
 object Runner  {
-  import io.circe.generic.auto._
-  import FailFastCirceSupport._
+
 
   def main(args: Array[String]) {
 
@@ -25,15 +27,7 @@ object Runner  {
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext = system.dispatcher
 
-    val route =
-      path("hello") {
-        post {
-          entity(as[BaseRequest]) { request=>
-            complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Say hello to akka-http</h1>"))
-          }
-
-        }
-      }
+    val route = CirceRoute.route ~ ArgonautRoute.route
 
     val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
 

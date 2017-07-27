@@ -15,9 +15,10 @@ enablePlugins(GatlingPlugin)
 
 libraryDependencies ++= List(
   "de.heikoseeberger" %% "akka-http-circe" % "1.17.0",
-  "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.2" % "test",
+  "de.heikoseeberger" %% "akka-http-argonaut" % "1.17.0",
   "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.5" % "test,it",
-  "io.gatling" % "gatling-test-framework" % "2.2.5" % "test,it"
+  "io.gatling" % "gatling-test-framework" % "2.2.5" % "test,it",
+  "io.argonaut" %% "argonaut" % "6.2"
 )
 
 // https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor_2.11
